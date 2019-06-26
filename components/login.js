@@ -1,18 +1,30 @@
-import React from 'react'
+import React ,{Component} from 'react'
 import { StyleSheet, Text, TextInput, View, Button } from 'react-native'
-import { StackNavigator } from 'react-navigation';
+import Firebase from './../firebase'
 
-
-
-export default class Login extends React.Component {
-  state = { email: '', password: '', errorMessage: null }
-  handleLogin = () => {
-    // TODO: Firebase stuff...
-    this.props.navigation.navigate('About');
-    console.log('handleLogin')
+export default class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: "",
+      password: ""
+    };
   }
+  
+  handleLogin = (email, password) => {
+    try {
+      Firebase.auth().signInWithEmailAndPassword(email.trim(), password).then((res) => {
+          console.log("logged in!")
+          this.props.navigation.navigate('App');
+      }).catch(function(error) {
+        alert(error.toString())
+      })
+    } catch (error) {
+      console.log(error.toString(error));
+    }
+  };
+
   render() {
-    const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
         <Text>Login</Text>
@@ -35,7 +47,7 @@ export default class Login extends React.Component {
           onChangeText={password => this.setState({ password })}
           value={this.state.password}
         />
-        <Button title="Login" onPress={this.handleLogin} />
+        <Button title="Login" onPress={() => this.handleLogin(this.state.email, this.state.password)} />
       </View>
     )
   }
