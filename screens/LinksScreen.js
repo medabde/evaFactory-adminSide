@@ -1,27 +1,51 @@
 import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
-import { ExpoLinksView } from '@expo/samples';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ActivityIndicator,
+} from 'react-native';
+import firebase from '../firebase'
 
-export default function LinksScreen() {
-  return (
-    <ScrollView style={styles.container}>
-      {/**
-       * Go ahead and delete ExpoLinksView and replace it with your content;
-       * we just wanted to provide you with some helpful links.
-       */}
-      <ExpoLinksView />
-    </ScrollView>
-  );
+export default class LinksScreen extends React.Component {
+  state = {
+    courses: []
+  };
+
+  componentDidMount() {
+    this.setState({animating:true})
+    firebase.database().ref('Courses/').once('value', (snapshot) => {
+      var data=snapshot.val()
+      var items=Object.values(data)
+      this.setState({courses:items})
+      this.setState({animating:false})
+    });
+  }
+
+  render(){
+    const animating = this.state.animating
+    return (
+      <View style={styles.container}>
+        
+        {this.state.courses.map(course => {
+          return (<Text>{course.name}</Text>)
+        })
+        }
+
+      <ActivityIndicator size="large" animating={animating} />
+        
+      </View>
+    );
+  }
 }
 
 LinksScreen.navigationOptions = {
-  title: 'Links',
+  header: null
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 15,
     backgroundColor: '#fff',
   },
 });

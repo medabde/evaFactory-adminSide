@@ -15,6 +15,7 @@ const HomeStack = createStackNavigator({
 });
 
 HomeStack.navigationOptions = {
+  header: null,
   tabBarLabel: 'Students',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
@@ -47,7 +48,7 @@ const SettingsStack = createStackNavigator({
 });
 
 SettingsStack.navigationOptions = {
-  tabBarLabel: 'About Admin',
+  tabBarLabel: 'About',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
