@@ -3,8 +3,9 @@ import {
   StyleSheet,
   Text,
   View,
-  ActivityIndicator,
+  ActivityIndicator, 
 } from 'react-native';
+
 
 import firebase from '../firebase'
 
@@ -12,7 +13,7 @@ export default class HomeScreen extends React.Component{
   state = {
     students: []
   };
-
+  
   componentDidMount() {
     this.setState({animating:true})
     firebase.database().ref('Students/').once('value', (snapshot) => {
@@ -24,6 +25,7 @@ export default class HomeScreen extends React.Component{
   }
   render() {
     const animating = this.state.animating
+    
     return (
       <View style={styles.container}>
         {this.state.students.map(student => {
@@ -36,12 +38,14 @@ export default class HomeScreen extends React.Component{
 }
 
 HomeScreen.navigationOptions = {
-  header: null
+  title:"Students"
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  }
-});
+   flex: 1,
+   paddingTop: 22,
+   backgroundColor: '#fff',
+  },
+})
+

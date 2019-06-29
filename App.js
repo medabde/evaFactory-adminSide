@@ -6,10 +6,6 @@ import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import AppNavigator from './navigation/AppNavigator';
-import Loading from './components/loading'
-import Login from './components/login'
-import MainTabNavigator from './navigation/MainTabNavigator';
-
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);

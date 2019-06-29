@@ -7,7 +7,7 @@ export default class Loading extends React.Component {
     componentDidMount() {
         firebase.auth().onAuthStateChanged(user => {
           setTimeout(() => {
-            this.props.navigation.navigate(user ? 'App' : 'Auth');
+            this.props.navigation.navigate(user ? 'HomeStack' : 'AuthStack');
           }, 1500);
           })
     }
@@ -19,6 +19,11 @@ export default class Loading extends React.Component {
         </View>
     )}
 }
+
+Loading.navigationOptions = {
+  header:null
+};
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

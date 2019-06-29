@@ -24,7 +24,7 @@ export default class Login extends Component {
     };
   
   handleLogin = (email, password) => {
-    if(email.trim()=="zaki@eva.co"){
+    if(email.trim().toLowerCase()=="zaki@eva.co"){
       try {
         Firebase.auth().signInWithEmailAndPassword(email.trim(), password).then((res) => {
             console.log("logged in!")

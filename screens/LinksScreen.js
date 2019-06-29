@@ -40,7 +40,7 @@ export default class LinksScreen extends React.Component {
 }
 
 LinksScreen.navigationOptions = {
-  header: null
+  title:"Courses"
 };
 
 const styles = StyleSheet.create({
